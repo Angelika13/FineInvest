@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FineInvest.Models.ICSUser>
+
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+
+<h2>
+    <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
+    Пользователи
+</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            E-mail
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Сменить пароль", "ResetPassword", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
+            </td>
+        </tr>
+    }
+
+</table>

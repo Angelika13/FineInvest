@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="">
+
+    <span class="dropdown">
+        <a class="dropdown-toggle not_a" data-toggle="dropdown" href="#">
+            <span class="glyphicon glyphicon-user"></span>  @User.Identity.GetUserName()
+            <font size="1"><span class="glyphicon glyphicon-triangle-bottom"></span></font>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="not_a" href="/Articles/PortfelControl/@User.Identity.GetUserId()">Портфель</a> </li>
+            <li><a class="not_a" href="/Users/Edit/@User.Identity.GetUserId()">Личные данные</a></li>
+        </ul>
+    </span>
+    <span>I</span>
+    <a class="not_a" href="/Users/LogOut">ВЫЙТИ</a>
+
+</div>
+    }
+}
+else
+{
+<div class="">
+    @Html.ActionLink("РЕГИСТРАЦИЯ", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "not_a" })
+    <span>I</span>
+    @Html.ActionLink("ВХОД", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "not_a" })
+</div>
+}

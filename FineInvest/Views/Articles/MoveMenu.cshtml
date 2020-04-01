@@ -1,0 +1,100 @@
+﻿@using FineInvest.HtmlHelpers
+@model FineInvest.Models.ViewArticle
+
+@{
+    ViewBag.Title = "Финансовые инвестиции";
+}
+@section Scripts {
+    <script src="~/Scripts/jquery.dotdotdot.min.js"></script>
+    <script type="text/javascript">
+        function sayHi() {
+        }
+
+        setInterval(sayHi, 100);
+
+        $(function () {
+            $('.box').dotdotdot();
+        });
+    </script>
+}
+
+
+
+    <div class="col-md-9 news">
+        <h3>ДАЙДЖЕСТ</h3>
+        @foreach (var item in Model.Articles)
+        {
+            <h3>
+                <a href="~/Articles/Show/@item.Id">@item.Caption</a>
+            </h3>
+            <font color="gray">
+                <p>
+                    @Html.DisplayFor(modelItem => item.DateOrd) |
+                    @Html.DisplayFor(modelItem => item.Category.Name) /
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+                </p>
+            </font>
+            <div class="box">
+                @if (item.Picture != null)
+                {
+                    @Html.Raw("<img style='width:160px;' align='left'  id='upload-img' alt='image' src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Picture) + "\" />");
+                }
+                else
+                {
+                }
+                @Html.DisplayFor(modelItem => item.ArtTxt)
+            </div>
+
+        }
+        <br />
+        <div class="btn-group pull-right">
+            @Html.PageLinks(Model.PagingInfo, x => Url.Action("MoveMenu", new { page = x }))
+        </div>
+    </div>
+<div class="col-md-3">
+
+    <a class="btn btn-default btn-portfel" href="/Articles/PortfelControl">
+        <span class="glyphicon glyphicon-briefcase"></span> ПОРТФЕЛЬ
+    </a>  <br />
+    <br />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    Курсы валют НБ РБ
+                    <br /><font size="1" color="gray">на @Model.AllCurrency.First().DateLoad</font>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AllCurrency)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CharCode)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Value)</td>
+                    @if (item.Changes < 0)
+                    {
+                        <td><font color="red">@Html.DisplayFor(modelItem => item.Changes)</font></td>
+                    }
+                    else
+                    {
+                        if (item.Changes > 0)
+                        {
+                            <td><font color="green">@Html.DisplayFor(modelItem => item.Changes)</font></td>
+                        }
+                        else
+                        {
+                            <td><font color="gray">@Html.DisplayFor(modelItem => item.Changes)</font></td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h3>ПОЛЕЗНЫЕ СТАТЬИ</h3>
+    @foreach (var item in Model.PolezArt)
+    {
+        <h4><i class="glyphicon glyphicon-tag text-success" aria-hidden="true"></i> @Html.ActionLink(item.Caption, "Show", new { id = item.Id }, htmlAttributes: new { @class = "text-dark" })</h4>
+    }
+</div>
+

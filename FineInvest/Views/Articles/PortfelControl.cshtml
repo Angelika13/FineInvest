@@ -1,0 +1,163 @@
+﻿@model FineInvest.Models.ViewPortfel
+
+@{
+    /**/
+
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Портфель";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-9">
+        @if (Request.IsAuthenticated)
+        {
+            if (!User.IsInRole("admin"))
+            {
+        <h2 style='color:darkorange;' >Портфель инвестора</h2>
+              
+                <table class="table">
+                    <tr>
+                        <th>
+                            Категория 
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                        </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Portfels)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Article.Category.Name)
+                        </td>
+                        <td class="artTxt">
+                            <p>@Html.DisplayFor(modelItem => item.Article.Caption)</p>
+                        </td>
+                        <td>
+                            @if (item.OpenAccess)
+                            {
+                            <a class="" href="/Articles/Show/@item.ArticleId">
+                                <span class="glyphicon glyphicon-list-alt"></span><span> Читать</span>
+                            </a>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-hourglass text-warning"></span><span> Доступ запрошен</span>
+                            }
+                        </td>
+                        <td></td>
+                    </tr>
+                    }
+                </table>
+                <hr />
+                <h3>Доступные материалы</h3>
+                <table class="table">
+                    @foreach (var item in Model.Articles)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category.Name)
+                            </td>
+                            <td class="artTxt">
+                                <p>@Html.DisplayFor(modelItem => item.Caption)</p>
+                            </td>
+                            <td>
+                                <a class="btn btn-default" href="/Articles/OpenArt/@item.Id">
+                                    <span class="glyphicon glyphicon-plus"></span>  Запросить доступ
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+            if (User.IsInRole("admin"))
+            {
+                <h3>Запросы</h3>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Пользователь
+                        </th>
+                        <th>
+                            Категория 
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.PortAccess)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FIO)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Article.Category.Name)
+                            </td>
+                            <td class="artTxt">
+                                <p>@Html.DisplayFor(modelItem => item.Article.Caption)</p>
+                            </td>
+                            <td>
+                                <a class="btn btn-default" href="/Articles/accessOk/@item.Id">
+                                    <span class="glyphicon glyphicon-ok text-success"></span>  Разрешить
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default" href="/Articles/accessRem/@item.Id">
+                                    <span class="glyphicon glyphicon-remove text-danger"></span>  Отклонить
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <h3>Материалы пользователей</h3>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Пользователь
+                        </th>
+                        <th>
+                            Категория 
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Portfels)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FIO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Article.Category.Name)
+                        </td>
+                        <td class="artTxt">
+                            <p>@Html.DisplayFor(modelItem => item.Article.Caption)</p>
+                        </td>
+                        <td>
+                            <a class="btn btn-default" href="/Articles/accessRem/@item.Id">
+                                <span class="glyphicon glyphicon-remove text-danger"></span>  Закрыть доступ
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </table>
+
+            }
+        }
+    </div>
+}

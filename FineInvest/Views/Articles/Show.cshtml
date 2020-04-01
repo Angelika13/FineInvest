@@ -1,0 +1,64 @@
+﻿@model FineInvest.Models.ShowArticle
+
+@{
+    ViewBag.Title = Model.Caption;
+}
+
+@using (Html.BeginForm())
+{
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="col-md-9 news">
+        <h3>@Html.DisplayFor(model => model.Caption)</h3>
+        <font color="gray">
+            <p>
+                @Html.DisplayFor(model => model.DateOrd) |
+                @Html.DisplayFor(model => model.CategoryName) /
+                @Html.DisplayFor(model => model.TypeName)
+            </p>  
+        </font>
+        <hr />
+        @if (Model.Picture != null)
+        {
+            @Html.Raw("<img style='width:400px; padding-top: 5px; padding-right: 5px;' align='left'  id='upload-img' alt='image' src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Picture) + "\" />");
+        }
+        else
+        {
+        }
+        <p>@Html.DisplayFor(model => model.ArtTxt)</p>
+    </div>
+    <div class="col-md-3">
+        @foreach (var item in Model.Articles)
+        {
+            <br />
+            <h4>
+                <a href="~/Articles/Show/@item.Id">@item.Caption</a>
+
+                <br />
+                <font color="gray" size="2">
+
+                    @Html.DisplayFor(modelItem => item.DateOrd) |
+                    @Html.DisplayFor(modelItem => item.Category.Name) /
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+
+                </font>
+            </h4>
+            <div class="box">
+                @if (item.Picture != null)
+                {
+                    @Html.Raw("<img style='width:120px;' align='left'  id='upload-img' alt='image' src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Picture) + "\" />");
+                }
+                else
+                {
+                }
+                @Html.DisplayFor(modelItem => item.ArtTxt)
+            </div>
+
+        }
+    </div>
+</div>
+}

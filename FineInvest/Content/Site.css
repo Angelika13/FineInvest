@@ -1,0 +1,270 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /*padding-top: 150px;*/
+    height: 100%;
+    background-color: #f7f7f8;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+nav.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    display: block;
+    padding: 10px 0;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 35px;
+    word-spacing: 4px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.logbtn {
+    text-align: right;
+}
+
+    .logbtn a, .logbtn span {
+        padding-left: 10px;
+        color: #9d9d9d;
+    }
+
+.not_a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.not_a:focus {
+    color: white;
+    text-decoration: none;
+}
+
+.not_a:active {
+    color: white;
+    text-decoration: none;
+}
+
+footer {
+    padding-top: 20px;
+    margin-top: 50px;
+}
+
+    footer p {
+        color: #9d9d9d;
+    }
+
+    footer .risk {
+        font-size: 11px;
+    }
+
+.news {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.box img {
+    padding-top: 5px;
+    padding-right: 5px;
+}
+.box {
+    height: 120px;
+    overflow: hidden;
+}
+
+.a_adm {
+    color: #ffc3c3;
+}
+
+    .a_adm:hover {
+        color: #ff9494;
+    }
+
+table {
+    white-space: nowrap;
+}
+
+.artTxt p {
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tabBtn {
+    width: 250px;
+}
+
+.artWidth {
+    max-width: 1200px;
+    width: 100%;
+}
+
+.rowCateg {
+    align-items: flex-start;
+}
+.colCateg {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+    .colCateg label {
+        padding: 0;
+        padding-bottom: 10px;
+        width: 0;
+        text-transform: uppercase;
+        color: #4f4f4f
+    }
+
+.btn.btn-default.btn-portfel {
+    color: black;
+    background-color: #ffb642;
+   
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.view_img {
+    height: 300px;
+    width: 400px;
+    width: auto;
+    margin-bottom: -90px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+    .view_img img {
+        width: 400px;
+        max-height: 300px;
+        max-width: 400px;
+    }
+
+.btn-tertiary {
+    color: #555;
+    padding: 0;
+    line-height: 40px;
+    max-width: 400px;
+    max-height: 300px;
+    min-width: 400px;
+    min-height: 300px;
+    margin: auto;
+    display: block;
+    border: 2px solid #555
+}
+
+    .btn-tertiary:hover, .btn-tertiary:focus {
+        color: #888;
+        border-color: #888
+    }
+
+.input-file {
+    width: .1px;
+    height: .1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1
+}
+
+.js-fileName {
+    padding: 15px 134px;
+    height: 70px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.54);
+}
+
+.input-file + .js-labelFile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0;
+    cursor: pointer;
+}
+
+    .input-file + .js-labelFile .icon:before {
+        content: "\f093"
+    }
+
+    .input-file + .js-labelFile.has-file .icon:before {
+        content: "\f00c";
+        color: #5AAC7B;
+    }
+
+.btnSize {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .menu .nav {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Hiding the checkbox, but allowing it to be focused */
+.badgebox {
+    opacity: 0;
+}
+
+    .badgebox + .badge {
+        /* Move the check mark away when unchecked */
+        text-indent: -999999px;
+        /* Makes the badge's width stay the same checked and unchecked */
+        width: 27px;
+    }
+
+    .badgebox:focus + .badge {
+        /* Set something to make the badge looks focused */
+        /* This really depends on the application, in my case it was: */
+        /* Adding a light border */
+        box-shadow: inset 0px 0px 5px;
+        /* Taking the difference out of the padding */
+    }
+
+    .badgebox:checked + .badge {
+        /* Move the check mark back when checked */
+        text-indent: 0;
+    }

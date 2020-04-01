@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/Images/favicon.ico" type="images/x-icon">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <div class="row">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    @Html.ActionLink("FineInvest", "Index", "Articles", new { area = "" }, new { @class = "not_a logo" })
+                </div>
+                <div class="col-md-4 logbtn">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+            <div class="collapse navbar-collapse menu">
+                <ul class="nav navbar-nav navbar-dark bg-dark">
+                    <li class="dropdown">
+                        <a href="~/Articles/Index">Главная</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Индексы
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=1&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=1&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=1&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Акции
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=2&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=2&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=2&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Облигации
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=3&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=3&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=3&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Товары
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=4&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=4&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=4&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            ETF
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=5&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=5&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=5&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            FOREX
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=6&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=6&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=6&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Крипто
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="~/Articles/MoveMenu?categ=7&type=1">Новости</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=7&type=2">Аналитика</a></li>
+                            <li><a href="~/Articles/MoveMenu?categ=7&type=3">Идеи</a></li>
+                        </ul>
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        if (User.IsInRole("admin"))
+                        {
+                            <li>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="a_adm">Администратор</span>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("Пользователи", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("Статьи", "List", "Articles")</li>
+                                    <li>@Html.ActionLink("Добавить статью", "Create", "Articles")</li>
+                                    <li>@Html.ActionLink("Материалы", "PortfelControl", "Articles")</li>
+                                </ul>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer-classic  navbar-inverse ">
+        <div class="container body-content">
+            <div>
+                <p class="risk">
+                    Предупреждение о риске: Торговля финансовыми инструментами и (или) криптовалютами сопряжена с высокими рисками, включая риск потери части или всей суммы инвестиций, поэтому подходит не всем инвесторам. Цены на криптовалюты чрезвычайно волатильны и могут изменяться под действием внешних факторов, таких как финансовые новости, законодательные решения или политические события. Маржинальная торговля приводит к повышению финансовых рисков.
+                    Прежде чем принимать решение о совершении сделки с финансовым инструментом или криптовалютами, вы должны получить полную информацию о рисках и затратах, связанных с торговлей на финансовых рынках, правильно оценить цели инвестирования, свой опыт и допустимый уровень риска, а при необходимости обратиться за профессиональной консультацией.
+                    Fusion Media напоминает, что информация, представленная на этом веб-сайте, не всегда актуальна или точна. Данные и цены на веб-сайте могут быть указаны не официальными представителями рынка или биржи, а рядовыми участниками. Это означает, что цены бывают неточны и могут отличаться от фактических цен на соответствующем рынке, а следовательно, носят ориентировочный характер и не подходят для использования в целях торговли. Fusion Media и любой поставщик данных, содержащихся на этом веб-сайте, отказываются от ответственности за любые потери или убытки, понесенные в результате осуществления торговых сделок, совершенных с оглядкой на указанную информацию.
+                    При отсутствии явно выраженного предварительного письменного согласия компании Fusion Media и (или) поставщика данных запрещено использовать, хранить, воспроизводить, отображать, изменять, передавать или распространять данные, содержащиеся на этом веб-сайте. Все права на интеллектуальную собственность сохраняются за поставщиками и (или) биржей, которые предоставили указанные данные.
+                    Fusion Media может получать вознаграждение от рекламодателей, упоминаемых на веб-сайте, в случае, если вы перейдете на сайт рекламодателя, свяжитесь с ним или иным образом отреагируете на рекламное объявление.
+                </p>
+            </div>
+            <hr />
+            <div class="footer-copyright text-center py-3">
+                <p>© 2020 Copyright: FineInvest - Отличные Инвестиции</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
